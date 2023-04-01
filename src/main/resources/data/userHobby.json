@@ -1,0 +1,182 @@
+[
+  {
+    "duration": "PT1H30M",
+    "lastDone": "2023-03-01T13:45:30Z",
+    "hobby": {
+      "hobbyId": 1,
+      "name": "Video Games"
+    },
+    "user": {
+      "userId": 1,
+      "firstName": "first",
+      "lastName": "user",
+      "age": 30,
+      "gender": "FEMALE"
+    }
+  },
+  {
+    "duration": "PT2H30M",
+    "lastDone": "2023-03-15T14:25:30Z",
+    "hobby": {
+      "hobbyId": 6,
+      "name": "Cycling"
+    },
+    "user": {
+      "userId": 1,
+      "firstName": "first",
+      "lastName": "user",
+      "age": 30,
+      "gender": "FEMALE"
+    }
+  },
+  {
+    "duration": "PT2H30M",
+    "lastDone": "2023-03-22T17:45:30Z",
+    "hobby": {
+      "hobbyId": 3,
+      "name": "Basketball"
+    },
+    "user": {
+      "userId": 2,
+      "firstName": "second",
+      "lastName": "user",
+      "age": 43,
+      "gender": "FEMALE"
+    }
+  },
+  {
+    "duration": "PT1H30M",
+    "lastDone": "2023-03-01T13:45:30Z",
+    "hobby": {
+      "hobbyId": 2,
+      "name": "Chess"
+    },
+    "user": {
+      "userId": 2,
+      "firstName": "second",
+      "lastName": "user",
+      "age": 43,
+      "gender": "FEMALE"
+    }
+  },
+  {
+    "duration": "PT1H30M",
+    "lastDone": "2023-03-01T13:45:30Z",
+    "hobby": {
+      "hobbyId": 2,
+      "name": "Chess"
+    },
+    "user":  {
+      "userId": 3,
+      "firstName": "third",
+      "lastName": "user",
+      "age": 23,
+      "gender": "MALE"
+    }
+  },
+  {
+    "duration": "PT1H15M",
+    "lastDone": "2023-03-23T18:25:30Z",
+    "hobby": {
+      "hobbyId": 4,
+      "name": "Reading"
+    },
+    "user":  {
+      "userId": 3,
+      "firstName": "third",
+      "lastName": "user",
+      "age": 23,
+      "gender": "MALE"
+    }
+  },
+  {
+    "duration": "PT1H30M",
+    "lastDone": "2023-03-14T19:55:30Z",
+    "hobby": {
+      "hobbyId": 5,
+      "name": "Football"
+    },
+    "user":  {
+      "userId": 4,
+      "firstName": "fourth",
+      "lastName": "user",
+      "age": 32,
+      "gender": "MALE"
+    }
+  },
+  {
+    "duration": "PT3H30M",
+    "lastDone": "2023-03-30T17:50:30Z",
+    "hobby": {
+      "hobbyId": 1,
+      "name": "Video Games"
+    },
+    "user":  {
+      "userId": 4,
+      "firstName": "fourth",
+      "lastName": "user",
+      "age": 32,
+      "gender": "MALE"
+    }
+  },
+  {
+    "duration": "PT3H30M",
+    "lastDone": "2023-03-29T16:45:30Z",
+    "hobby": {
+      "hobbyId": 4,
+      "name": "Reading"
+    },
+    "user": {
+      "userId": 5,
+      "firstName": "fifth",
+      "lastName": "user",
+      "age": 45,
+      "gender": "FEMALE"
+    }
+  },
+  {
+    "duration": "PT2H30M",
+    "lastDone": "2023-03-29T20:25:30Z",
+    "hobby": {
+      "hobbyId": 7,
+      "name": "Running"
+    },
+    "user": {
+      "userId": 5,
+      "firstName": "fifth",
+      "lastName": "user",
+      "age": 45,
+      "gender": "FEMALE"
+    }
+  },
+  {
+    "duration": "PT5H45M",
+    "lastDone": "2023-03-30T23:45:30Z",
+    "hobby": {
+      "hobbyId": 8,
+      "name": "Gambling"
+    },
+    "user": {
+      "userId": 6,
+      "firstName": "sixth",
+      "lastName": "user",
+      "age": 24,
+      "gender": "MALE"
+    }
+  },
+  {
+    "duration": "PT1H15M",
+    "lastDone": "2023-03-31T01:00:30Z",
+    "hobby": {
+      "hobbyId": 9,
+      "name": "Diving"
+    },
+    "user": {
+      "userId": 6,
+      "firstName": "sixth",
+      "lastName": "user",
+      "age": 24,
+      "gender": "MALE"
+    }
+  }
+]

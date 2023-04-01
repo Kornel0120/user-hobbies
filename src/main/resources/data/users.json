@@ -1,0 +1,38 @@
+[
+  {
+    "firstName": "first",
+    "lastName": "user",
+    "age": 30,
+    "gender": "FEMALE"
+  },
+  {
+    "firstName": "second",
+    "lastName": "user",
+    "age": 43,
+    "gender": "FEMALE"
+  },
+  {
+    "firstName": "third",
+    "lastName": "user",
+    "age": 23,
+    "gender": "MALE"
+  },
+  {
+    "firstName": "fourth",
+    "lastName": "user",
+    "age": 32,
+    "gender": "MALE"
+  },
+  {
+    "firstName": "fifth",
+    "lastName": "user",
+    "age": 45,
+    "gender": "FEMALE"
+  },
+  {
+    "firstName": "sixth",
+    "lastName": "user",
+    "age": 24,
+    "gender": "MALE"
+  }
+]

@@ -1,10 +1,13 @@
 package com.example.demo.model;
 
-import java.sql.Timestamp;
-import java.time.Duration;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
 public class Hobby {
+    private Long hobbyId;
     private String name;
-    private Duration duration;
-    private Timestamp lastDone;
 }
