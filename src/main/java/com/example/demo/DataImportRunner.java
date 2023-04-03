@@ -7,7 +7,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,8 +15,8 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
-@Slf4j
 @Component
 public class DataImportRunner implements ApplicationRunner {
     @Autowired
@@ -25,6 +24,8 @@ public class DataImportRunner implements ApplicationRunner {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    private static final Logger logger = Logger.getLogger(DataImportRunner.class.getName());
 
     @Override
     @Transactional
@@ -45,10 +46,10 @@ public class DataImportRunner implements ApplicationRunner {
                     entityManager.persist(d);
                 }
             } catch (IOException e) {
-                log.error(e.getMessage());
+                logger.info(e.getMessage());
             }
         } else {
-            log.error("Json file is missing from the given directory! Path: {}", file.getPath());
+            logger.info("Json file is missing from the given directory! Path: " + file.getPath());
         }
     }
 }

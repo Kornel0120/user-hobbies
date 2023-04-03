@@ -1,67 +1,65 @@
-package com.example.demo.service.impl;
+package com.example.demo.service;
 
 import com.example.demo.entity.UserEntity;
 import com.example.demo.exceptions.AlreadyExistsException;
 import com.example.demo.exceptions.NotFoundException;
-import com.example.demo.mapper.Mapper;
 import com.example.demo.model.Hobby;
 import com.example.demo.model.User;
 import com.example.demo.model.UserHobby;
+import com.example.demo.model.mapper.HobbyMapper;
+import com.example.demo.model.mapper.UserHobbyMapper;
+import com.example.demo.model.mapper.UserMapper;
 import com.example.demo.repository.HobbyRepository;
 import com.example.demo.repository.UserHobbyRepository;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.service.interfaces.UserService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserService {
     private final UserRepository userRepository;
     private final HobbyRepository hobbyRepository;
     private final UserHobbyRepository userHobbyRepository;
-    private final Mapper mapper;
 
-    @Override
+    public UserService(UserRepository userRepository, HobbyRepository hobbyRepository, UserHobbyRepository userHobbyRepository) {
+        this.userRepository = userRepository;
+        this.hobbyRepository = hobbyRepository;
+        this.userHobbyRepository = userHobbyRepository;
+    }
+
     public List<User> getUsers() {
         return userRepository.findAll()
                 .stream()
-                .map(mapper::userEntityToUser)
+                .map(UserMapper::userEntityToUser)
                 .collect(Collectors.toList());
     }
 
-    @Override
     public User postUser(User user) throws AlreadyExistsException {
         if(userRepository.existsById(user.getUserId())) {
             throw new AlreadyExistsException("User already exists!");
         }
 
-        UserEntity newUser = userRepository.save(mapper.userToUserEntity(user));
+        final UserEntity newUser = userRepository.save(UserMapper.userToUserEntity(user));
 
-        return mapper.userEntityToUser(newUser);
+        return UserMapper.userEntityToUser(newUser);
     }
 
-    @Override
     public List<Hobby> getHobbies() {
         return hobbyRepository.findAll()
                 .stream()
-                .map(mapper::hobbyEntityToHobby)
+                .map(HobbyMapper::hobbyEntityToHobby)
                 .collect(Collectors.toList());
     }
 
-    @Override
     public List<UserHobby> getHobbiesByUserId(Long userId) throws NotFoundException {
         if(!userRepository.existsById(userId)) {
             throw new NotFoundException("User not found!");
         }
         return userHobbyRepository.getHobbiesByUserUserId(userId)
                 .stream()
-                .map(mapper::userHobbyEntityToUserHobby)
+                .map(UserHobbyMapper::userHobbyEntityToUserHobby)
                 .collect(Collectors.toList());
     }
 }

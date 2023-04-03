@@ -5,8 +5,7 @@ import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.model.Hobby;
 import com.example.demo.model.User;
 import com.example.demo.model.UserHobby;
-import com.example.demo.service.impl.UserServiceImpl;
-import lombok.RequiredArgsConstructor;
+import com.example.demo.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,19 +15,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-@RequiredArgsConstructor
 public class UserController {
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
-    @GetMapping("/")
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok(userService.getUsers());
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         try {
-            User newUser = userService.postUser(user);
+            final User newUser = userService.postUser(user);
             return ResponseEntity.ok("User " + newUser.getFirstName() + " " + newUser.getLastName() + " was registered successfully!");
         } catch (AlreadyExistsException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
@@ -43,7 +45,7 @@ public class UserController {
     @GetMapping("/{userId}/hobbies")
     public ResponseEntity<List<UserHobby>> getHobbiesForASpecificUser(@PathVariable long userId) {
         try {
-            List<UserHobby> hobbies = userService.getHobbiesByUserId(userId);
+            final List<UserHobby> hobbies = userService.getHobbiesByUserId(userId);
             return ResponseEntity.ok(hobbies);
         } catch (NotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
