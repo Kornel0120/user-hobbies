@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.Queue.QueueImpl;
 import com.example.demo.exceptions.AlreadyExistsException;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.model.Hobby;
@@ -47,6 +48,30 @@ public class UserController {
         try {
             final List<UserHobby> hobbies = userService.getHobbiesByUserId(userId);
             return ResponseEntity.ok(hobbies);
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping("/dequeueUsers")
+    public ResponseEntity<User> dequeueUsersIntoQueueImpl() {
+        try {
+            if (userService.queueUsersIntoQueueImpl().isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Queue is empty");
+            }
+            return ResponseEntity.ok(userService.queueUsersIntoQueueImpl().dequeue());
+        } catch (NotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping("/peekUsers")
+    public ResponseEntity<User> peekUsersIntoQueueImpl() {
+        try {
+            if (userService.queueUsersIntoQueueImpl().isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Queue is empty");
+            }
+            return ResponseEntity.ok(userService.queueUsersIntoQueueImpl().peek());
         } catch (NotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

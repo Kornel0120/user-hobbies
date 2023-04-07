@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.Queue.QueueImpl;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.exceptions.AlreadyExistsException;
 import com.example.demo.exceptions.NotFoundException;
@@ -22,6 +23,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final HobbyRepository hobbyRepository;
     private final UserHobbyRepository userHobbyRepository;
+
+    private final QueueImpl<User> userQueue = new QueueImpl<>();
 
     public UserService(UserRepository userRepository, HobbyRepository hobbyRepository, UserHobbyRepository userHobbyRepository) {
         this.userRepository = userRepository;
@@ -61,5 +64,16 @@ public class UserService {
                 .stream()
                 .map(UserHobbyMapper::userHobbyEntityToUserHobby)
                 .collect(Collectors.toList());
+    }
+
+    public QueueImpl<User> queueUsersIntoQueueImpl() throws NotFoundException {
+        if(userRepository.findAll().isEmpty()) {
+            throw new NotFoundException("Queue is empty");
+        }
+
+        List<UserEntity> users = userRepository.findAll();
+        QueueImpl<User> queue = new QueueImpl<>();
+        users.stream().map(UserMapper::userEntityToUser).forEach(queue::enqueue);
+        return queue;
     }
 }
