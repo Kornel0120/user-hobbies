@@ -37,6 +37,11 @@ public class UserService {
     }
 
     public User postUser(User user) throws AlreadyExistsException {
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         if(userRepository.existsById(user.getUserId())) {
             throw new AlreadyExistsException("User already exists!");
         }
