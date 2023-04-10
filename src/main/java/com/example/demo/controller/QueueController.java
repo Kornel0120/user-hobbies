@@ -19,12 +19,16 @@ public class QueueController {
     private static final Logger logger = Logger.getLogger(DataImportRunner.class.getName());
 
     public QueueController() {
-        queue = new QueueImpl<>();
+        queue = new QueueImpl<>(10);
     }
 
     @PostMapping("/enqueue/{string}")
     public ResponseEntity<String> enqueue(@PathVariable String string) {
-        queue.enqueue(string);
+        try {
+            queue.enqueue(string);
+        } catch (Exception e) {
+            return ResponseEntity.ok("Queue is full");
+        }
         logger.info("Size: " + queue.size());
         return ResponseEntity.ok("Enqueued: " + string);
     }
@@ -41,7 +45,11 @@ public class QueueController {
     @GetMapping("/peek")
     public ResponseEntity<String> peek() {
         logger.info("Size: " + queue.size());
-        return ResponseEntity.ok("Peeked: " + queue.peek());
+        try {
+            return ResponseEntity.ok("Peeked: " + queue.peek());
+        } catch (Exception e) {
+            return ResponseEntity.ok("Queue is empty");
+        }
     }
 
     @GetMapping("/isEmpty")
@@ -50,7 +58,7 @@ public class QueueController {
         if (queue.isEmpty()) {
             return ResponseEntity.ok("Queue is empty");
         }
-        return ResponseEntity.ok("Is empty: " + queue.isEmpty());
+        return ResponseEntity.ok("Queue is not empty");
     }
 
     @GetMapping("/size")

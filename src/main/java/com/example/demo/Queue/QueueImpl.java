@@ -1,36 +1,55 @@
 package com.example.demo.Queue;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 public class QueueImpl<T> {
-    private final Queue<T> queue;
+    private final T[] elements;
+    private final int maxSize;
+    private int currentSize;
+    private int head;
+    private int tail;
 
-    public QueueImpl() {
-        this.queue = new LinkedList<>();
+    public QueueImpl(int maxSize) {
+        this.elements = (T[]) new Object[maxSize];
+        this.maxSize = maxSize;
+        this.currentSize = 0;
+        this.head = 0;
+        this.tail = 0;
     }
 
-    public void enqueue(T element) {
-        queue.offer(element);
+    public void enqueue(T value) throws RuntimeException {
+        if (isFull()) {
+            throw new RuntimeException("Queue is full.");
+        }
+        elements[tail] = value;
+        tail = (tail + 1) % maxSize;
+        currentSize++;
     }
 
-    public  T dequeue() {
-        return queue.poll();
+    public T dequeue() throws RuntimeException {
+        if (isEmpty()) {
+            throw new RuntimeException("Queue is empty.");
+        }
+        T value = elements[head];
+        head = (head + 1) % maxSize;
+        currentSize--;
+        return value;
     }
 
-    public T peek() {
-        return queue.peek();
+    public T peek() throws RuntimeException {
+        if (isEmpty()) {
+            throw new RuntimeException("Queue is empty.");
+        }
+        return elements[head];
+    }
+
+    public boolean isFull() {
+        return currentSize == maxSize;
     }
 
     public boolean isEmpty() {
-        return queue.isEmpty();
+        return currentSize == 0;
     }
 
     public int size() {
-        return queue.size();
-    }
-
-    public boolean contains(T element) {
-        return queue.contains(element);
+        return currentSize;
     }
 }

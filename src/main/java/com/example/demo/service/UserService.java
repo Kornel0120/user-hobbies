@@ -24,7 +24,7 @@ public class UserService {
     private final HobbyRepository hobbyRepository;
     private final UserHobbyRepository userHobbyRepository;
 
-    private final QueueImpl<User> userQueue = new QueueImpl<>();
+    private final QueueImpl<User> userQueue = new QueueImpl<>(10);
 
     public UserService(UserRepository userRepository, HobbyRepository hobbyRepository, UserHobbyRepository userHobbyRepository) {
         this.userRepository = userRepository;
@@ -72,7 +72,7 @@ public class UserService {
         }
 
         List<UserEntity> users = userRepository.findAll();
-        QueueImpl<User> queue = new QueueImpl<>();
+        QueueImpl<User> queue = new QueueImpl<>(10);
         users.stream().map(UserMapper::userEntityToUser).forEach(queue::enqueue);
         return queue;
     }
